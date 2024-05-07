@@ -212,8 +212,8 @@ public class Server extends javax.swing.JFrame {
 
         server.setBackground(new java.awt.Color(153, 153, 153));
         server.setFont(new java.awt.Font("Tahoma", 0, 14));
-        server.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_ubuntu_40px.png")));
-        server.setText("Server");
+        server.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_tamrong.png")));
+        server.setText("Tamrong");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
