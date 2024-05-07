@@ -40,8 +40,57 @@ public class Client extends javax.swing.JFrame {
         }
     }
     public void Disconnect(){
-        
+        try{
+            sentMessage.append("Disconnected.\n");
+            theSocket.close();
+        }catch(Exception e){
+
+        }
+        isConnected=false;
+        client_Name.setEditable(true);
     }
+    public void theClient(){
+        initComponents();
+    }
+
+    
+    
+    @SuppressWarnings("no checked")
+    private void initComponents(){
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        sentMessage = new javax.swing.JTextArea();
+        Message = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        disConnect = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        isConnnected = new javax.swing.JLabel();
+        client_Name = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        Send = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1.setBackground(new java.awt.Color(255,255,255));
+        
+        sentMessage.setBackground(new java.awt.Color(240,240,240));
+        sentMessage.setColumns(20);
+        sentMessage.setFont(new java.awt.Font("segoe Script",1,11));
+        sentMessage.setRows(5);
+        jScrollPane1.setViewportView(sentMessage);
+
+        Message.setFont(new java.awt.Font("segoe Script",1,11));
+        Message.setText("your messages");
+        Message.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0,0,0)));
+        Message.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt){
+                MessageMouseEntered(evt);
+            }
+        });
+    }
+    
 
 
     private javax.swing.JTextField Message;
