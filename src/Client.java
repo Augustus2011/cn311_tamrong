@@ -1,64 +1,74 @@
+
 import java.awt.Color;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import javax.swing.plaf.TreeUI;
+
 
 public class Client extends javax.swing.JFrame {
-    Source OOP=new Source();
-    String username,address="localhost";
+
+    Source OOP = new Source();
+    String username, address = "localhost";
     ArrayList<String> users = new ArrayList();
-    Boolean isConnected=false;
+
+    Boolean isConnected = false;
+
     Socket theSocket;
     BufferedReader theReader;
     PrintWriter theWriter;
-    
-    public void ListenThread(){
-        Thread IncomingReader=new Thread(new Message());
+
+    public void ListenThread() {
+        Thread IncomingReader = new Thread(new Message());
         IncomingReader.start();
     }
-    public void userAdd(String data){
+
+    public void userAdd(String data) {
         users.add(data);
     }
-    public void userRemove(String data){
-        sentMessage.append(data+" ofline jaa.\n");
+
+    public void userRemove(String data) {
+        sentMessage.append(data + " is now offline.\n");
     }
-    public void writeUsers(){
-        String[] tempList=new String[(users.size())];
+
+    public void writeUsers() {
+        String[] tempList = new String[(users.size())];
         users.toArray(tempList);
-        for (String token:tempList){
-            
-        }
-    }
-    public void sendDisconnect(){
-        String bye=(username+":Disconnect.\n");
-        try{
-            theWriter.println(bye);
-            theWriter.flush();
-        }
-        catch (Exception e){
-            sentMessage.append("no connected.\n");
-        }
-    }
-    public void Disconnect(){
-        try{
-            sentMessage.append("Disconnected.\n");
-            theSocket.close();
-        }catch(Exception e){
+        for (String token : tempList) {
 
         }
-        isConnected=false;
-        client_Name.setEditable(true);
     }
-    public void Client(){
+
+    public void sendDisconnect() {
+        String bye = (username + ": :Disconnect");
+        try {
+            theWriter.println(bye);
+            theWriter.flush();
+        } catch (Exception e) {
+            sentMessage.append("You're not connected.\n");
+        }
+    }
+
+    public void Disconnect() {
+        try {
+            sentMessage.append("Disconnected.\n");
+            theSocket.close();
+        } catch (Exception ex) {
+
+        }
+        isConnected = false;
+        client_Name.setEditable(true);
+
+    }
+
+    public Client() {
         initComponents();
     }
 
     
-    
-    @SuppressWarnings("no checked")
-    private void initComponents(){
+    @SuppressWarnings("unchecked")
+    private void initComponents() {
+
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         sentMessage = new javax.swing.JTextArea();
@@ -75,50 +85,51 @@ public class Client extends javax.swing.JFrame {
         Send = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        jPanel1.setBackground(new java.awt.Color(255,255,255));
-        
-        sentMessage.setBackground(new java.awt.Color(240,240,240));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        sentMessage.setBackground(new java.awt.Color(240, 240, 240));
         sentMessage.setColumns(20);
-        sentMessage.setFont(new java.awt.Font("segoe Script",1,11));
+        sentMessage.setFont(new java.awt.Font("Segoe Script", 1, 11));
         sentMessage.setRows(5);
         jScrollPane1.setViewportView(sentMessage);
 
-        Message.setFont(new java.awt.Font("segoe Script",1,11));
-        Message.setText("your messages");
-        Message.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0,0,0)));
+        Message.setFont(new java.awt.Font("Segoe Script", 1, 11));
+        Message.setText("Your messages");
+        Message.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Message.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt){
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 MessageMouseEntered(evt);
             }
         });
         Message.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt){
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 MessageKeyPressed(evt);
             }
-
-            public void KeyReleased(java.awt.event.KeyEvent evt){
+            public void keyReleased(java.awt.event.KeyEvent evt) {
                 MessageKeyReleased(evt);
             }
-
-            public void keyTyped(java.awt.event.KeyEvent evt){
+            public void keyTyped(java.awt.event.KeyEvent evt) {
                 MessageKeyTyped(evt);
             }
         });
         
-        jPanel2.setBackground(new java.awt.Color(255,255,255));
-        javax.swing.GroupLayout jPanel2Layout =new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0,56,Short.MAX_VALUE)
+            .addGap(0, 56, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0,30,Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(255,255,255));
-        disConnect.setIcon(new javax.swing.ImageIcon(getClass().getResource("Icons/icons8_disconnected_30px_1.png")));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        disConnect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_disconnected_30px_1.png")));
         disConnect.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 disConnectMouseClicked(evt);
@@ -131,7 +142,7 @@ public class Client extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout=new javax.swing.GroupLayout(jPanel3);
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +154,6 @@ public class Client extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(disConnect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -172,7 +182,7 @@ public class Client extends javax.swing.JFrame {
         );
 
         client_Name.setBackground(new java.awt.Color(240, 240, 240));
-        client_Name.setFont(new java.awt.Font("Segoe Script", 1, 11)); // NOI18N
+        client_Name.setFont(new java.awt.Font("Segoe Script", 1, 11));
         client_Name.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         client_Name.setText("Client name");
         client_Name.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
@@ -181,7 +191,6 @@ public class Client extends javax.swing.JFrame {
                 client_NameMouseExited(evt);
             }
         });
-
         client_Name.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 client_NameKeyPressed(evt);
@@ -194,16 +203,16 @@ public class Client extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_people_30px_1.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_people_30px_1.png")));
         jLabel4.setText(".");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel5.setText("...");
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         Send.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Send.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_paper_plane_30px.png"))); // NOI18N
+        Send.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_paper_plane_30px.png")));
         Send.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SendMouseClicked(evt);
@@ -294,86 +303,94 @@ public class Client extends javax.swing.JFrame {
         pack();
     }
 
-    
-    private void isConnnectedMouseClicked(java.awt.event.MouseEvent evt){
-        switch(client_Name.getText()){
+    private void isConnnectedMouseClicked(java.awt.event.MouseEvent evt) {
+
+        switch (client_Name.getText()) {
             case "":
-                client_Name.setText("your name!");
+                client_Name.setText("Input yuor name!!");
                 break;
             case "Client name":
-                client_Name.setText("your name!");
+                client_Name.setText("Input yuor name!!");
                 break;
-            case "Input your name!":
+            case "Input yuor name!!":
                 break;
             default:
                 jLabel5.setForeground(Color.GREEN);
-                if(isConnected==false){
-                    username=client_Name.getText();
+                if (isConnected == false) {
+                    username = client_Name.getText();
                     client_Name.setEditable(false);
 
-                    try{
-                        theSocket=new Socket(address,2222);
-                        InputStreamReader streamreader=new InputStreamReader(theSocket.getInputStream());
-                        theReader =new BufferedReader(streamreader);
-                        theWriter =new PrintWriter(theSocket.getOutputStream());
-                        theWriter.println(username + ": has connected");
+                    try {
+                        theSocket = new Socket(address, 2222);
+                        InputStreamReader streamreader = new InputStreamReader(theSocket.getInputStream());
+                        theReader = new BufferedReader(streamreader);
+                        theWriter = new PrintWriter(theSocket.getOutputStream());
+                        theWriter.println(username + ": has connected :Connect");
                         theWriter.flush();
-                        isConnected=true;
-                    } catch (Exception ex){
-                        sentMessage.append("cannot connect!");
+                        isConnected = true;
+                    } catch (Exception ex) {
+                        sentMessage.append("Cannot Connect! Try Again. \n");
                         client_Name.setEditable(true);
                     }
 
                     ListenThread();
-                }else if (isConnected==true){
-                    sentMessage.append("connected");
+
+                } else if (isConnected == true) {
+                    sentMessage.append("You are connected. \n");
                 }
+
         }
+
+
     }
-    private void disConnectMouseClicked(java.awt.event.MouseEvent evt){
+
+    private void disConnectMouseClicked(java.awt.event.MouseEvent evt) {
+        
         sendDisconnect();
         jLabel5.setForeground(Color.black);
         Disconnect();
     }
 
-    private void SendMouseClicked(java.awt.event.MouseEvent evt){
-        switch (Message.getText()){
+    private void SendMouseClicked(java.awt.event.MouseEvent evt) {
+
+        switch (Message.getText()) {
             case "Your messages":
                 Message.setText("Type your message here");
                 Message.requestFocus();
                 break;
             case "Client name":
                 break;
-            case "Input your name":
+            case "Input yuor name":
                 break;
             default:
-                try{
-                    theWriter.println(username+" : "+Message.getText()+":"+"Chat");
-                    theWriter.flush();
-                }catch (Exception ex){
-                    sentMessage.append("cannpt connect!");
-                }
-                Message.setText("");
-                Message.requestFocus();
+              try {
+                theWriter.println(username + " : " + Message.getText() + ":" + "Chat");
+                theWriter.flush();
+            } catch (Exception ex) {
+                sentMessage.append("You're not connected. \n");
+            }
+            Message.setText("");
+            Message.requestFocus();
+
         }
 
         Message.setText("Your messages");
         Message.requestFocus();
     }
 
-    private void MessageKeyPressed(java.awt.event.KeyEvent evt){
-        if (Message.getText().equals("your messages")){
+    private void MessageKeyPressed(java.awt.event.KeyEvent evt) {
+        if (Message.getText().equals("Your messages"))
             Message.setText("");
-        }
     }
 
-    private void client_NameKeyPressed(java.awt.event.KeyEvent evt){
-        if(client_Name.getText().equals("Client name")){
+    private void client_NameKeyPressed(java.awt.event.KeyEvent evt) {
+       
+        if (client_Name.getText().equals("Client name"))
             client_Name.setText("");
-        }
     }
 
-    private void isConnnectedMouseEntered(java.awt.event.KeyEvent evt){
+    private void isConnnectedMouseEntered(java.awt.event.MouseEvent evt) {
+        
         OOP.changeColor(jPanel4);
     }
 
@@ -394,7 +411,6 @@ public class Client extends javax.swing.JFrame {
     }
 
     private void MessageMouseEntered(java.awt.event.MouseEvent evt) {
-       
 
     }
 
@@ -403,19 +419,17 @@ public class Client extends javax.swing.JFrame {
     }
 
     private void client_NameKeyTyped(java.awt.event.KeyEvent evt) {
-         
         switch (client_Name.getText()) {
             case "Client name":
                 client_Name.setText("");
                 break;
-            case "Input yuor name!!":
+            case "Input your name!!":
                 client_Name.setText("");
             default:
         }
     }
 
     private void client_NameKeyReleased(java.awt.event.KeyEvent evt) {
-        
         switch (client_Name.getText()) {
             case "":
                 client_Name.setText("Client name");
@@ -428,39 +442,47 @@ public class Client extends javax.swing.JFrame {
 
     }
 
-    private void SendMouseEntered(java.awt.event.KeyEvent evt){
+    private void SendMouseEntered(java.awt.event.MouseEvent evt) {
+       
         OOP.changeColor(jPanel5);
     }
 
-    private void SendMouseExited(java.awt.event.KeyEvent evt){
+    private void SendMouseExited(java.awt.event.MouseEvent evt) {
+      
         OOP.NormalWhite(jPanel5);
     }
 
-    private void MessageKeyReleased(java.awt.event.KeyEvent evt){
-        switch (Message.getText()){
+    private void MessageKeyReleased(java.awt.event.KeyEvent evt) {
+      
+        switch (Message.getText()) {
             case "":
                 Message.setText("Your messages");
                 break;
             default:
-                String name=Message.getText();
-                String result=name.substring(0,1).toUpperCase()+name.substring(1);
+                String name = Message.getText();
+                String result = name.substring(0, 1).toUpperCase() + name.substring(1);
                 Message.setText(result);
         }
     }
-    private void MessageKeyTyped(java.awt.event.KeyEvent evt){
+
+    private void MessageKeyTyped(java.awt.event.KeyEvent evt) {
 
     }
 
-    public static void main(String args[]){
-        try{
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        
+        try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex){
-            java.util.logging.Logger.getLogger(Client.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
@@ -468,15 +490,15 @@ public class Client extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run(){
+            public void run() {
                 new Client().setVisible(true);
             }
         });
     }
 
-
+    
     private javax.swing.JTextField Message;
     private javax.swing.JLabel Send;
     private javax.swing.JTextField client_Name;
@@ -491,8 +513,8 @@ public class Client extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea sentMessage;
-
-    public class Message implements Runnable {
+    
+public class Message implements Runnable {
 
         @Override
         public void run() {
@@ -525,4 +547,3 @@ public class Client extends javax.swing.JFrame {
         }
     }
 }
-
