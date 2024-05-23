@@ -1,0 +1,85 @@
+Server เปิดเเล้ว...
+พบการเชื่อมค่อ 
+Received: A: พบการเชื่อมต่อ :Connect
+A
+ พบการเชื่อมต่อ 
+Connect
+ส่งข้อความ: A: พบการเชื่อมต่อ :Chat
+Aได้เข้ามา 
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: Server: :Done
+Received: A : Hi:Chat
+A 
+ Hi
+Chat
+ส่งข้อความ: A : Hi:Chat
+พบการเชื่อมค่อ 
+Received: Mi: พบการเชื่อมต่อ :Connect
+Mi
+ พบการเชื่อมต่อ 
+Connect
+ส่งข้อความ: Mi: พบการเชื่อมต่อ :Chat
+ส่งข้อความ: Mi: พบการเชื่อมต่อ :Chat
+Miได้เข้ามา 
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: Mi: :Connect
+ส่งข้อความ: Mi: :Connect
+ส่งข้อความ: Server: :Done
+ส่งข้อความ: Server: :Done
+Received: A: :Disconnect
+A
+ 
+Disconnect
+ส่งข้อความ: A:ได้ออกจากห้อง:Chat
+ส่งข้อความ: A:ได้ออกจากห้อง:Chat
+ส่งข้อความ: Mi: :Connect
+ส่งข้อความ: Mi: :Connect
+ส่งข้อความ: Server: :Done
+ส่งข้อความ: Server: :Done
+หลุดการเชื่อมต่อ 
+Received: Mi : ม่ายยย:Chat
+Mi 
+ ม่ายยย
+Chat
+ส่งข้อความ: Mi : ม่ายยย:Chat
+พบการเชื่อมค่อ 
+Received: A: พบการเชื่อมต่อ :Connect
+A
+ พบการเชื่อมต่อ 
+Connect
+ส่งข้อความ: A: พบการเชื่อมต่อ :Chat
+ส่งข้อความ: A: พบการเชื่อมต่อ :Chat
+Aได้เข้ามา 
+ส่งข้อความ: Mi: :Connect
+ส่งข้อความ: Mi: :Connect
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: Server: :Done
+ส่งข้อความ: Server: :Done
+Received: A : ผมมา:Chat
+A 
+ ผมมา
+Chat
+ส่งข้อความ: A : ผมมา:Chat
+ส่งข้อความ: A : ผมมา:Chat
+Received: Mi: :Disconnect
+Mi
+ 
+Disconnect
+ส่งข้อความ: Mi:ได้ออกจากห้อง:Chat
+ส่งข้อความ: Mi:ได้ออกจากห้อง:Chat
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: Server: :Done
+ส่งข้อความ: Server: :Done
+หลุดการเชื่อมต่อ 
+Received: A: :Disconnect
+A
+ 
+Disconnect
+ส่งข้อความ: A:ได้ออกจากห้อง:Chat
+ส่งข้อความ: Server: :Done
+หลุดการเชื่อมต่อ 
+Server ปิดเเล้วจ้า... 
+

@@ -1,0 +1,30 @@
+Received: A: :Disconnect
+A
+ 
+Disconnect
+Received: C: :Disconnect
+C
+ 
+Disconnect
+Received: B: :Disconnect
+B
+ 
+Disconnect
+พบการเชื่อมค่อ 
+Received: A: ได้เชื่อมต่อ :Connect
+A
+ ได้เชื่อมต่อ 
+Connect
+ส่งข้อความ: A: ได้เชื่อมต่อ :Chat
+Aได้เข้ามา 
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: Server: :Done
+Received: A: :Disconnect
+A
+ 
+Disconnect
+ส่งข้อความ: A:ได้ออกจากห้อง:Chat
+ส่งข้อความ: Server: :Done
+หลุดการเชื่อมต่อ 
+Server ปิดเเล้วจ้า... 
+

@@ -1,7 +1,24 @@
+//io
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+//network
+import java.net.ServerSocket;
+import java.net.Socket;
+
+//util
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Date;
+
+//data
+import java.text.SimpleDateFormat;
+
+
 
 
 public class Server extends javax.swing.JFrame {
@@ -9,6 +26,16 @@ public class Server extends javax.swing.JFrame {
     Source OOP = new Source();
     ArrayList clientOutputStreams;
     ArrayList<String> users;
+
+
+    private javax.swing.JTextArea dataStored;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel server;
 
     public class ClientHandler implements Runnable {
 
@@ -23,51 +50,46 @@ public class Server extends javax.swing.JFrame {
                 InputStreamReader isReader = new InputStreamReader(sock.getInputStream());
                 reader = new BufferedReader(isReader);
             } catch (Exception ex) {
-                dataStored.append("Unexpected error... \n");
             }
 
         }
 
-        @Override
         public void run() {
-
             String message, chat = "Chat";
             String[] data;
-
             try {
+                
                 while ((message = reader.readLine()) != null) {
-
+                    
                     dataStored.append("Received: " + message + "\n");
                     data = message.split(":");
-
+        
                     for (String token : data) {
                         dataStored.append(token + "\n");
                     }
-
-                    switch (data[2]) {
-                        case "Connect":
-                            tellEveryone((data[0] + ":" + data[1] + ":" + chat));
-                            userAdd(data[0]);
-                            break;
-                        case "Disconnect":
-                            tellEveryone((data[0] + ":has disconnected." + ":" + chat));
-                            userRemove(data[0]);
-                            break;
-                        case "Chat":
-                            tellEveryone(message);
-                            break;
-                        default:
-                            dataStored.append("No Conditions were met. \n");
+        
+                    
+                    if (data[2].equals("Connect")) {
+                        tellEveryone(data[0] + ":" + data[1] + ":" + chat);
+                        userAdd(data[0]);
+                    } else if (data[2].equals("Disconnect")) {
+                        tellEveryone(data[0] + ":ได้ออกจากห้อง" + ":" + chat);
+                        userRemove(data[0]);
+                    } else if (data[2].equals("Chat")) {
+                        tellEveryone(message);
+                    } else {
+                        dataStored.append("ไม่สามารถทำงานได้ \n");
                     }
-
                 }
             } catch (Exception ex) {
-                dataStored.append("Lost a connection. \n");
+                dataStored.append("หลุดการเชื่อมต่อ \n");
                 ex.printStackTrace();
                 clientOutputStreams.remove(client);
             }
         }
-    }
+        
+
+        }
 
     public Server() {
         initComponents();
@@ -82,18 +104,14 @@ public class Server extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         server = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 255,255));
 
         dataStored.setColumns(20);
-        dataStored.setFont(new java.awt.Font("Segoe Script", 1, 11));
+        dataStored.setFont(new java.awt.Font("TimesRoman", 1, 11));
         dataStored.setRows(5);
         dataStored.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane1.setViewportView(dataStored);
@@ -101,7 +119,7 @@ public class Server extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_start_20px.png")));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/start-button.png")));
         jLabel2.setText("Start");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -126,10 +144,9 @@ public class Server extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
-
+        jPanel3.setBackground(new java.awt.Color(240, 240, 240));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_stop_20px.png")));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/stop-button.png")));
         jLabel3.setText("Stop");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -147,142 +164,96 @@ public class Server extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
-        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_user_groups_20px.png")));
-        jLabel4.setText("Users");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel4MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel4MouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-        );
-
-        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_broom_20px.png")));
-        jLabel5.setText("Clear");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel5MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel5MouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-        );
-
         server.setBackground(new java.awt.Color(153, 153, 153));
-        server.setFont(new java.awt.Font("Tahoma", 0, 14));
-        server.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_tamrong.png")));
-        server.setText("Tamrong");
+        server.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/chat icon.png")));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup()
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(server, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup()
+                    .addComponent(server)
+                    .addComponent(jPanel2)
+                    .addComponent(jPanel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup()
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup()
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(server)
                         .addGap(64, 64, 64)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel3)
+                        .addGap(64, 64, 64)
+                        ))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup()
+            .addComponent(jPanel1)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup()
+            .addComponent(jPanel1)
         );
 
         pack();
     }
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {
-        OOP.serverChange(server);
         Thread starter = new Thread(new StartServer());
         starter.start();
 
-        dataStored.append("Server started...\n");
+        dataStored.append("Server เปิดเเล้ว...\n");
     }
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {
-        OOP.serverNormal(server);
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt){
         try {
-            Thread.sleep(50);
-            tellEveryone("Server:is stopping and all users will be disconnected.\n:Chat");
-            dataStored.append("Server stopping... \n");
+            Thread.sleep(1000);
+            tellEveryone("Server:กำลังปิด \n:Chat");
+            dataStored.append("Server ปิดเเล้วจ้า... \n");
+    
+            
+            File logDir = new File("logs");
+            if (!logDir.exists()) {
+                logDir.mkdirs();
+            }
+            
+            String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String logFilename = "logs/"+ timestamp + ".txt";
+            
+            try (PrintWriter out = new PrintWriter(logFilename)) {
+                out.println(dataStored.getText());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            
+    
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-
+    
         dataStored.setText("");
+
     }
 
     private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {
@@ -300,54 +271,9 @@ public class Server extends javax.swing.JFrame {
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {
         OOP.normalColor(jPanel3);
     }
-
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {
-        dataStored.append("\n Online users : \n");
-        for (String current_user : users) {
-            dataStored.append(current_user);
-            dataStored.append("\n");
-        }
-    }
-
-    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {
-        OOP.changeColor(jPanel4);
-    }
-
-    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {
-        OOP.normalColor(jPanel4);
-    }
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {
-        dataStored.setText("");
-    }
-
-    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {
-        OOP.changeColor(jPanel5);
-    }
-
-    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {
-        OOP.normalColor(jPanel5);
-    }
-
     
     public static void main(String args[]) {
         
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Server.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Server.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Server.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Server.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -358,9 +284,8 @@ public class Server extends javax.swing.JFrame {
 
     public void userAdd(String data) {
         String message, add = ": :Connect", done = "Server: :Done", name = data;
-        dataStored.append("Before " + name + " added. \n");
         users.add(name);
-        dataStored.append("After " + name + " added. \n");
+        dataStored.append(name + "ได้เข้ามา \n");
         String[] tempList = new String[(users.size())];
         users.toArray(tempList);
 
@@ -390,30 +315,17 @@ public class Server extends javax.swing.JFrame {
             try {
                 PrintWriter writer = (PrintWriter) it.next();
                 writer.println(message);
-                dataStored.append("Sending folking message: " + message + "\n");
+                dataStored.append("ส่งข้อความ: " + message + "\n");
                 writer.flush();
                 dataStored.setCaretPosition(dataStored.getDocument().getLength());
 
             } catch (Exception ex) {
-                dataStored.append("Error telling everyone. \n");
             }
         }
     }
 
 
-    private javax.swing.JTextArea dataStored;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel server;
- public class StartServer implements Runnable {
+ public class StartServer implements Runnable{
 
         public void run() {
             clientOutputStreams = new ArrayList();
@@ -426,13 +338,13 @@ public class Server extends javax.swing.JFrame {
                     Socket clientSock = serverSock.accept();
                     PrintWriter writer = new PrintWriter(clientSock.getOutputStream());
                     clientOutputStreams.add(writer);
-
                     Thread listener = new Thread(new ClientHandler(clientSock, writer));
+                    
                     listener.start();
-                    dataStored.append("Got a connection. \n");
+                    
+                    dataStored.append("พบการเชื่อมค่อ \n");
                 }
             } catch (Exception ex) {
-                dataStored.append("Server was already started. \n");
             }
         }
     }

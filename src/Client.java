@@ -1,9 +1,14 @@
 
-import java.awt.Color;
-import java.io.*;
-import java.net.Socket;
-import java.util.ArrayList;
+//io
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.InputStreamReader;
 
+//network
+import java.net.Socket;
+
+//util
+import java.util.ArrayList;
 
 
 public class Client extends javax.swing.JFrame {
@@ -34,9 +39,6 @@ public class Client extends javax.swing.JFrame {
     public void writeUsers() {
         String[] tempList = new String[(users.size())];
         users.toArray(tempList);
-        for (String token : tempList) {
-
-        }
     }
 
     public void sendDisconnect() {
@@ -45,13 +47,12 @@ public class Client extends javax.swing.JFrame {
             theWriter.println(bye);
             theWriter.flush();
         } catch (Exception e) {
-            sentMessage.append("You're not connected.\n");
         }
     }
 
     public void Disconnect() {
         try {
-            sentMessage.append("Disconnected.\n");
+            sentMessage.append("ยกเลิกการเชื่อมต่อ \n");
             theSocket.close();
         } catch (Exception ex) {
 
@@ -66,7 +67,6 @@ public class Client extends javax.swing.JFrame {
     }
 
     
-    @SuppressWarnings("unchecked")
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -74,34 +74,28 @@ public class Client extends javax.swing.JFrame {
         sentMessage = new javax.swing.JTextArea();
         Message = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        disConnect = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        isConnnected = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         client_Name = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        Send = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 255, 255));
 
         sentMessage.setBackground(new java.awt.Color(240, 240, 240));
         sentMessage.setColumns(20);
-        sentMessage.setFont(new java.awt.Font("Segoe Script", 1, 11));
+        sentMessage.setFont(new java.awt.Font("TimesRoman", 1, 11));
         sentMessage.setRows(5);
         jScrollPane1.setViewportView(sentMessage);
 
-        Message.setFont(new java.awt.Font("Segoe Script", 1, 11));
-        Message.setText("Your messages");
+        Message.setFont(new java.awt.Font("TimesRoman", 1, 11));
+        Message.setText("พิมข้อความ");
         Message.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        Message.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                MessageMouseEntered(evt);
-            }
-        });
+        Message.setBackground(new java.awt.Color(240,240,240));
         Message.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 MessageKeyPressed(evt);
@@ -114,51 +108,40 @@ public class Client extends javax.swing.JFrame {
             }
         });
         
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        
+
+        jPanel2.setBackground(new java.awt.Color(240, 240, 240));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plug-button.png")));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                disConnectMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                isConnectMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                isConnectMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 56, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(5, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(240, 240, 240));
 
-        disConnect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_disconnected_30px_1.png")));
-        disConnect.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                disConnectMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                disConnectMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                disConnectMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(disConnect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(disConnect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        isConnnected.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_connect_30px.png"))); // NOI18N
-        isConnnected.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/connect-button.png")));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 isConnnectedMouseClicked(evt);
             }
@@ -170,27 +153,23 @@ public class Client extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(isConnnected, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(isConnnected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         client_Name.setBackground(new java.awt.Color(240, 240, 240));
-        client_Name.setFont(new java.awt.Font("Segoe Script", 1, 11));
+        client_Name.setFont(new java.awt.Font("TimesRoman", 1, 11));
         client_Name.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        client_Name.setText("Client name");
+        client_Name.setText("ชื่อของคุณ");
         client_Name.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        client_Name.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                client_NameMouseExited(evt);
-            }
-        });
+        
         client_Name.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 client_NameKeyPressed(evt);
@@ -203,17 +182,14 @@ public class Client extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_people_30px_1.png")));
-        jLabel4.setText(".");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/people icon.png")));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel5.setText("...");
+        jPanel4.setBackground(new java.awt.Color(240, 240, 240));
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-
-        Send.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Send.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_paper_plane_30px.png")));
-        Send.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/plane-button.png")));
+        
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SendMouseClicked(evt);
             }
@@ -225,15 +201,15 @@ public class Client extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Send, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Send)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -242,51 +218,49 @@ public class Client extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
+                
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Message, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Message)
+                        .addComponent(jPanel4)
                         .addGap(23, 23, 23))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup()
+                            .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(client_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup()
+                                    .addComponent(jLabel5)
+                                    .addGap(23, 23, 23))
+                                .addComponent(client_Name)
                                 .addGap(18, 18, 18)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                ))
+                                .addGap(16, 16, 16)
+                
+                        )))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(client_Name, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(client_Name)
+                    .addComponent(jPanel3)
+                    .addComponent(jPanel2)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Message, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(22, Short.MAX_VALUE))))
+                            .addComponent(Message)
+                            .addComponent(jPanel4))
+                        .addContainerGap(16, Short.MAX_VALUE))))
+                        
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -305,41 +279,33 @@ public class Client extends javax.swing.JFrame {
 
     private void isConnnectedMouseClicked(java.awt.event.MouseEvent evt) {
 
-        switch (client_Name.getText()) {
-            case "":
-                client_Name.setText("Input yuor name!!");
-                break;
-            case "Client name":
-                client_Name.setText("Input yuor name!!");
-                break;
-            case "Input yuor name!!":
-                break;
-            default:
-                jLabel5.setForeground(Color.GREEN);
-                if (isConnected == false) {
-                    username = client_Name.getText();
-                    client_Name.setEditable(false);
-
-                    try {
-                        theSocket = new Socket(address, 2222);
-                        InputStreamReader streamreader = new InputStreamReader(theSocket.getInputStream());
-                        theReader = new BufferedReader(streamreader);
-                        theWriter = new PrintWriter(theSocket.getOutputStream());
-                        theWriter.println(username + ": has connected :Connect");
-                        theWriter.flush();
-                        isConnected = true;
-                    } catch (Exception ex) {
-                        sentMessage.append("Cannot Connect! Try Again. \n");
-                        client_Name.setEditable(true);
-                    }
-
-                    ListenThread();
-
-                } else if (isConnected == true) {
-                    sentMessage.append("You are connected. \n");
+        if (client_Name.getText().equals("")) {
+            client_Name.setText("ยังไม่มีชื่อเลย");
+        } else if (client_Name.getText().equals("ชื่อของคุณ")) {
+            client_Name.setText("เปลี่ยนชื่อของคุณก่อนน!");
+        } else {
+            if (!isConnected) {
+                username = client_Name.getText();
+                client_Name.setEditable(false);
+        
+                try {
+                    theSocket = new Socket(address, 2222);
+                    InputStreamReader streamreader = new InputStreamReader(theSocket.getInputStream());
+                    theReader = new BufferedReader(streamreader);
+                    theWriter = new PrintWriter(theSocket.getOutputStream());
+                    theWriter.println(username + ": พบการเชื่อมต่อ :Connect");
+                    theWriter.flush();
+                    isConnected = true;
+                } catch (Exception ex) {
+                    sentMessage.append("ไม่สามรถเชื่อมต่อได้โปรดลองอีกครั้ง \n");
                 }
-
+        
+                ListenThread();
+            } else {
+                sentMessage.append("คุณ เชื่อมต่อได้เเล้ว \n");
+            }
         }
+        
 
 
     }
@@ -347,121 +313,94 @@ public class Client extends javax.swing.JFrame {
     private void disConnectMouseClicked(java.awt.event.MouseEvent evt) {
         
         sendDisconnect();
-        jLabel5.setForeground(Color.black);
         Disconnect();
     }
 
     private void SendMouseClicked(java.awt.event.MouseEvent evt) {
 
-        switch (Message.getText()) {
-            case "Your messages":
-                Message.setText("Type your message here");
-                Message.requestFocus();
-                break;
-            case "Client name":
-                break;
-            case "Input yuor name":
-                break;
-            default:
-              try {
+        if (Message.getText().equals("พิมข้อความ")) {
+            Message.requestFocus();
+        }
+        else {
+            try {
                 theWriter.println(username + " : " + Message.getText() + ":" + "Chat");
                 theWriter.flush();
             } catch (Exception ex) {
-                sentMessage.append("You're not connected. \n");
             }
             Message.setText("");
             Message.requestFocus();
-
         }
 
-        Message.setText("Your messages");
+        Message.setText("พิมข้อความ");
         Message.requestFocus();
     }
 
     private void MessageKeyPressed(java.awt.event.KeyEvent evt) {
-        if (Message.getText().equals("Your messages"))
+        if (Message.getText().equals("พิมข้อความ"))
             Message.setText("");
     }
 
     private void client_NameKeyPressed(java.awt.event.KeyEvent evt) {
        
-        if (client_Name.getText().equals("Client name"))
+        if (client_Name.getText().equals("ชื่อของคุณ"))
             client_Name.setText("");
     }
 
     private void isConnnectedMouseEntered(java.awt.event.MouseEvent evt) {
         
-        OOP.changeColor(jPanel4);
+        OOP.changeColor(jPanel3);
     }
 
     private void isConnnectedMouseExited(java.awt.event.MouseEvent evt) {
         
-        OOP.NormalWhite(jPanel4);
-        
-    }
-
-    private void disConnectMouseEntered(java.awt.event.MouseEvent evt) {
-        
-        OOP.changeColor(jPanel3);
-    }
-
-    private void disConnectMouseExited(java.awt.event.MouseEvent evt) {
-        
         OOP.NormalWhite(jPanel3);
+        
     }
 
-    private void MessageMouseEntered(java.awt.event.MouseEvent evt) {
-
+    private void isConnectMouseEntered(java.awt.event.MouseEvent evt) {
+        
+        OOP.changeColor(jPanel2);
     }
 
-    private void client_NameMouseExited(java.awt.event.MouseEvent evt) {
-
+    private void isConnectMouseExited(java.awt.event.MouseEvent evt) {
+        
+        OOP.NormalWhite(jPanel2);
     }
 
     private void client_NameKeyTyped(java.awt.event.KeyEvent evt) {
-        switch (client_Name.getText()) {
-            case "Client name":
-                client_Name.setText("");
-                break;
-            case "Input your name!!":
-                client_Name.setText("");
-            default:
+        if (client_Name.getText().equals("ชื่อของคุณ")) {
+            client_Name.setText("");
         }
     }
 
     private void client_NameKeyReleased(java.awt.event.KeyEvent evt) {
-        switch (client_Name.getText()) {
-            case "":
-                client_Name.setText("Client name");
-                break;
-            default:
-                String name = client_Name.getText();
-                String result = name.substring(0, 1).toUpperCase() + name.substring(1);
-                client_Name.setText(result);
-        }
-
+        if (client_Name.getText().equals("")) {
+            client_Name.setText("ชื่อของคุณ");
+        } else {
+            String name = client_Name.getText();
+            String result = name.substring(0, 1).toUpperCase() + name.substring(1);
+            client_Name.setText(result);
+        }        
     }
 
     private void SendMouseEntered(java.awt.event.MouseEvent evt) {
        
-        OOP.changeColor(jPanel5);
+        OOP.changeColor(jPanel4);
     }
 
     private void SendMouseExited(java.awt.event.MouseEvent evt) {
       
-        OOP.NormalWhite(jPanel5);
+        OOP.NormalWhite(jPanel4);
     }
 
     private void MessageKeyReleased(java.awt.event.KeyEvent evt) {
-      
-        switch (Message.getText()) {
-            case "":
-                Message.setText("Your messages");
-                break;
-            default:
-                String name = Message.getText();
-                String result = name.substring(0, 1).toUpperCase() + name.substring(1);
-                Message.setText(result);
+        String text = Message.getText();
+        if (text.equals("")) {
+            Message.setText("พิมข้อความ");
+        } else {
+            String name = text;
+            String result = name.substring(0, 1).toUpperCase() + name.substring(1);
+            Message.setText(result);
         }
     }
 
@@ -469,27 +408,9 @@ public class Client extends javax.swing.JFrame {
 
     }
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String args[]) {
         
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -497,49 +418,40 @@ public class Client extends javax.swing.JFrame {
             }
         });
     }
-
     
     private javax.swing.JTextField Message;
-    private javax.swing.JLabel Send;
-    private javax.swing.JTextField client_Name;
-    private javax.swing.JLabel disConnect;
-    private javax.swing.JLabel isConnnected;
     private javax.swing.JLabel jLabel4;
-    public javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField client_Name;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea sentMessage;
     
 public class Message implements Runnable {
 
-        @Override
         public void run() {
             String[] data;
             String stream;
 
             try {
-                while (!(stream = theReader.readLine()).equals(null)) {
+                while ((stream = theReader.readLine()) != null) {
                     data = stream.split(":");
-
-                    switch (data[2]) {
-                        case "Chat":
-                            sentMessage.append(data[0] + ":" + data[1] + "\n");
-                            sentMessage.setCaretPosition(sentMessage.getDocument().getLength());
-                            break;
-                        case "Connnect":
-                            sentMessage.removeAll();
-                            userAdd(data[0]);
-                            break;
-                        case "Disconnect":
-                            userRemove(data[0]);
-                            break;
-                        case "Done":
-                            writeUsers();
-                            users.clear();
+                    if (data[2].equals("Chat")) {
+                        sentMessage.append(data[0] + ":" + data[1] + "\n");
+                        sentMessage.setCaretPosition(sentMessage.getDocument().getLength());
+                    } else if (data[2].equals("Connnect")) {
+                        sentMessage.removeAll();
+                        userAdd(data[0]);
+                    } else if (data[2].equals("Disconnect")) {
+                        userRemove(data[0]);
+                    } else if (data[2].equals("Done")) {
+                        writeUsers();
+                        users.clear();
                     }
                 }
             } catch (Exception ex) {

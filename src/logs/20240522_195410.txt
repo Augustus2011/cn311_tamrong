@@ -1,0 +1,24 @@
+Server เปิดเเล้ว...
+พบการเชื่อมค่อ 
+Received: An: ได้เชื่อมต่อ :Connect
+An
+ ได้เชื่อมต่อ 
+Connect
+ส่งข้อความ: An: ได้เชื่อมต่อ :Chat
+Anได้เพิ่มเข้ามา 
+ส่งข้อความ: An: :Connect
+ส่งข้อความ: Server: :Done
+Received: An : Hiiii:Chat
+An 
+ Hiiii
+Chat
+ส่งข้อความ: An : Hiiii:Chat
+Received: An: :Disconnect
+An
+ 
+Disconnect
+ส่งข้อความ: An:ได้ออกจากห้อง:Chat
+ส่งข้อความ: Server: :Done
+หลุดการเชื่อมต่อ 
+Server ปิดเเล้วจ้า... 
+

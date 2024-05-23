@@ -1,0 +1,15 @@
+Received: B: :Disconnect
+B
+ 
+Disconnect
+ส่งข้อความ: B:ได้ออกจากห้อง:Chat
+ส่งข้อความ: B:ได้ออกจากห้อง:Chat
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: Server: :Done
+ส่งข้อความ: Server: :Done
+หลุดการเชื่อมต่อ 
+ส่งข้อความ: Server:กำลังปิด 
+:Chat
+Server ปิดเเล้วจ้า... 
+

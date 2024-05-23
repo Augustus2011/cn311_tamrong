@@ -1,0 +1,9 @@
+Received: C: :Disconnect
+C
+ 
+Disconnect
+ส่งข้อความ: C:ได้ออกจากห้อง:Chat
+ส่งข้อความ: Server: :Done
+Lost a connection. 
+Server ปิดเเล้วจ้า... 
+

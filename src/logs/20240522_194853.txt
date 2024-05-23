@@ -1,0 +1,51 @@
+Server เปิดเเล้ว...
+พบการเชื่อมค่อ 
+Received: A: ได้เชื่อมต่อ :Connect
+A
+ ได้เชื่อมต่อ 
+Connect
+ส่งข้อความ: A: ได้เชื่อมต่อ :Chat
+Aได้เพิ่มเข้ามา 
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: Server: :Done
+Received: A: :Disconnect
+A
+ 
+Disconnect
+ส่งข้อความ: A:ได้ออกจากห้อง:Chat
+ส่งข้อความ: Server: :Done
+Lost a connection. 
+พบการเชื่อมค่อ 
+Received: A: ได้เชื่อมต่อ :Connect
+A
+ ได้เชื่อมต่อ 
+Connect
+ส่งข้อความ: A: ได้เชื่อมต่อ :Chat
+Aได้เพิ่มเข้ามา 
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: Server: :Done
+Received: A: :Disconnect
+A
+ 
+Disconnect
+ส่งข้อความ: A:ได้ออกจากห้อง:Chat
+ส่งข้อความ: Server: :Done
+Lost a connection. 
+พบการเชื่อมค่อ 
+Received: C: ได้เชื่อมต่อ :Connect
+C
+ ได้เชื่อมต่อ 
+Connect
+ส่งข้อความ: C: ได้เชื่อมต่อ :Chat
+Cได้เพิ่มเข้ามา 
+ส่งข้อความ: C: :Connect
+ส่งข้อความ: Server: :Done
+Received: C : Aaa:Chat
+C 
+ Aaa
+Chat
+ส่งข้อความ: C : Aaa:Chat
+ส่งข้อความ: Server:กำลังปิด 
+:Chat
+Server ปิดเเล้วจ้า... 
+

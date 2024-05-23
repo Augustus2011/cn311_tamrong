@@ -1,0 +1,79 @@
+Server เปิดเเล้ว...
+พบการเชื่อมค่อ 
+Received: A: ได้เชื่อมต่อ :Connect
+A
+ ได้เชื่อมต่อ 
+Connect
+ส่งข้อความ: A: ได้เชื่อมต่อ :Chat
+Aได้เข้ามา 
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: Server: :Done
+Received: A : ฟหกฟหก:Chat
+A 
+ ฟหกฟหก
+Chat
+ส่งข้อความ: A : ฟหกฟหก:Chat
+พบการเชื่อมค่อ 
+Received: B: ได้เชื่อมต่อ :Connect
+B
+ ได้เชื่อมต่อ 
+Connect
+ส่งข้อความ: B: ได้เชื่อมต่อ :Chat
+ส่งข้อความ: B: ได้เชื่อมต่อ :Chat
+Bได้เข้ามา 
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: B: :Connect
+ส่งข้อความ: B: :Connect
+ส่งข้อความ: Server: :Done
+ส่งข้อความ: Server: :Done
+พบการเชื่อมค่อ 
+Received: C: ได้เชื่อมต่อ :Connect
+C
+ ได้เชื่อมต่อ 
+Connect
+ส่งข้อความ: C: ได้เชื่อมต่อ :Chat
+ส่งข้อความ: C: ได้เชื่อมต่อ :Chat
+ส่งข้อความ: C: ได้เชื่อมต่อ :Chat
+Cได้เข้ามา 
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: A: :Connect
+ส่งข้อความ: B: :Connect
+ส่งข้อความ: B: :Connect
+ส่งข้อความ: B: :Connect
+ส่งข้อความ: C: :Connect
+ส่งข้อความ: C: :Connect
+ส่งข้อความ: C: :Connect
+ส่งข้อความ: Server: :Done
+ส่งข้อความ: Server: :Done
+ส่งข้อความ: Server: :Done
+Received: A : A:Chat
+A 
+ A
+Chat
+ส่งข้อความ: A : A:Chat
+ส่งข้อความ: A : A:Chat
+ส่งข้อความ: A : A:Chat
+Received: C : V:Chat
+C 
+ V
+Chat
+ส่งข้อความ: C : V:Chat
+ส่งข้อความ: C : V:Chat
+ส่งข้อความ: C : V:Chat
+Received: B : C:Chat
+B 
+ C
+Chat
+ส่งข้อความ: B : C:Chat
+ส่งข้อความ: B : C:Chat
+ส่งข้อความ: B : C:Chat
+Server เปิดเเล้ว...
+Server เปิดเเล้ว...
+Server เปิดเเล้ว...
+Server เปิดเเล้ว...
+Server เปิดเเล้ว...
+Server เปิดเเล้ว...
+Server ปิดเเล้วจ้า... 
+
